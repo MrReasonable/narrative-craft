@@ -1,0 +1,68 @@
+{
+  "name": "narrative-craft",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "start": "pnpm -r start",
+    "lint": "eslint \"{apps,libs,}/**/*.{js,ts,tsx,json,yml,yaml}\" \"*.{js,ts,json,yml,yaml}\" --max-warnings=0",
+    "lint:fix": "eslint \"{apps,libs,}/**/*.{js,ts,tsx,json,yml,yaml}\" \"*.{js,ts,json,yml,yaml}\" --fix",
+    "format": "prettier --check \"**/*.{js,ts,tsx,json,md,yml,yaml}\" \"*.{js,ts,json,md,yml,yaml}\"",
+    "format:fix": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\" \"*.{js,ts,json,md,yml,yaml}\"",
+    "commit": "cz",
+    "prepare": "node .husky/install.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.7.0",
+    "@types/eslint__eslintrc": "^2.1.1",
+    "@types/eslint__js": "^8.42.3",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.7.0",
+    "eslint-config-nestjs": "^0.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-json": "^4.0.0",
+    "eslint-plugin-jsonc": "^2.16.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-solid": "^0.14.1",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "eslint-plugin-yaml": "^1.0.3",
+    "eslint-plugin-yml": "^1.14.0",
+    "globals": "^15.8.0",
+    "husky": "^9.0.11",
+    "jsonc-eslint-parser": "^2.4.0",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.0.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --max-warnings=0"
+    ],
+    "*.{js,ts,tsx,json,md,yml,yaml}": [
+      "prettier --check"
+    ]
+  },
+  "dependencies": {
+    "class-validator": "^0.14.1"
+  }
+}
