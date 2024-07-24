@@ -14,7 +14,7 @@
     "format": "prettier --check \"**/*.{js,ts,tsx,json,md,yml,yaml}\" \"*.{js,ts,json,md,yml,yaml}\"",
     "format:fix": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\" \"*.{js,ts,json,md,yml,yaml}\"",
     "commit": "cz",
-    "prepare": ".husky/install.mjs"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
