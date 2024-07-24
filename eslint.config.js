@@ -4,12 +4,14 @@ import tsParser from '@typescript-eslint/parser'
 import eslintPluginSolid from 'eslint-plugin-solid'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginYaml from 'eslint-plugin-yaml'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { FlatCompat } from '@eslint/eslintrc'
 import globals from 'globals'
 import eslintPluginJest from 'eslint-plugin-jest'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import sonarjs from 'eslint-plugin-sonarjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -21,7 +23,16 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['**/*.{js,ts,tsx}'],
+    files: ['**/*.{js,ts,tsx,mjs,cjs}'],
+    extends: [sonarjs.configs.recommended, eslintPluginUnicorn.configs['flat/recommended']],
+    rules: {
+      'unicorn/prevent-abbreviations': [
+        'error',
+        {
+          ignore: [/\.e2e$/, /env\..*$/],
+        },
+      ],
+    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -35,7 +46,7 @@ export default tseslint.config(
     extends: [eslintPluginJest.configs['flat/recommended']],
   },
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,mjs,cjs}'],
     ...tseslint.configs.disableTypeChecked,
   },
   {
@@ -49,8 +60,17 @@ export default tseslint.config(
     ...eslintPluginSolid.configs['flat/typescript'],
   },
   {
+    files: ['apps/web-app/**/*.tsx'],
+    rules: {
+      'unicorn/filename-case': 'off',
+    },
+  },
+  {
     files: ['apps/backend/**/*.ts'],
     extends: [...compat.extends('nestjs')],
+    rules: {
+      'unicorn/prefer-top-level-await': 'off',
+    },
   },
   {
     files: ['**/*.json'],
