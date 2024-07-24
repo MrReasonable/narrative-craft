@@ -23,13 +23,29 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
+  {
     files: ['**/*.{js,ts,tsx,mjs,cjs}'],
     extends: [sonarjs.configs.recommended, eslintPluginUnicorn.configs['flat/recommended']],
     rules: {
       'unicorn/prevent-abbreviations': [
         'error',
         {
-          ignore: [/\.e2e$/, /env\..*$/],
+          ignore: [/.*\.e2e.*/, /env\..*$/],
         },
       ],
     },
@@ -44,6 +60,14 @@ export default tseslint.config(
   {
     files: ['**/*.spec.{js,ts,tsx}', '**/*.e2e-spec.{js,ts,tsx}'],
     extends: [eslintPluginJest.configs['flat/recommended']],
+    rules: {
+      'jest/expect-expect': [
+        'warn',
+        {
+          assertFunctionNames: ['expect', 'request.**.expect'],
+        },
+      ],
+    },
   },
   {
     files: ['**/*.{js,jsx,mjs,cjs}'],

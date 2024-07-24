@@ -4,10 +4,10 @@ import axios from 'axios'
 const UserRegistration = () => {
   const [email, setEmail] = createSignal('')
   const [password, setPassword] = createSignal('')
-  const [message, setMessage] = createSignal('')
+  const [_, setMessage] = createSignal('')
 
-  const handleSubmit = async (e: Event) => {
-    e.preventDefault()
+  const handleSubmit = async (event: Event) => {
+    event.preventDefault()
 
     try {
       await axios.post('http://localhost:3000/users/register', {
@@ -17,7 +17,7 @@ const UserRegistration = () => {
       setMessage('User registered successfully!')
       setEmail('')
       setPassword('')
-    } catch (error) {
+    } catch {
       setMessage('Registration failed.  Please try again!')
     }
   }
@@ -32,7 +32,7 @@ const UserRegistration = () => {
             type="email"
             id="email"
             value={email()}
-            onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
+            onInput={(event) => setEmail((event.target as HTMLInputElement).value)}
             required
           />
         </div>
@@ -42,7 +42,7 @@ const UserRegistration = () => {
             type="password"
             id="password"
             value={password()}
-            onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
+            onInput={(event) => setPassword((event.target as HTMLInputElement).value)}
             required
           />
         </div>
