@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["src/*"],
+      "@prisma/*": ["src/prisma/*"],
       "@config/*": ["src/config/*"],
       "@user/*": ["src/user/*"]
     }

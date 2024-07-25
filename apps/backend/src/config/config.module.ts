@@ -37,7 +37,7 @@ export interface ConfigOptions {
 @Module({
   providers: [ConfigService],
 })
-export class AppConfigModule {
+export class ConfigModule {
   private static config: ConfigService
   static forRoot(@Inject('CONFIG_OPTIONS') options: ConfigOptions = {}): DynamicModule {
     const {
@@ -50,8 +50,8 @@ export class AppConfigModule {
     const configProvider = {
       provide: ConfigService,
       useFactory: async (): Promise<ConfigService> => {
-        if (useCache && AppConfigModule.config) {
-          return AppConfigModule.config
+        if (useCache && ConfigModule.config) {
+          return ConfigModule.config
         }
 
         const environmentFile = path.resolve(process.cwd(), environmentFilePath)
@@ -70,7 +70,7 @@ export class AppConfigModule {
         const configService = new ConfigService(validatedConfig)
 
         if (useCache) {
-          AppConfigModule.config = configService
+          ConfigModule.config = configService
         }
 
         return configService
@@ -78,7 +78,7 @@ export class AppConfigModule {
     }
 
     return {
-      module: AppConfigModule,
+      module: ConfigModule,
       providers: [
         {
           provide: 'CONFIG_OPTIONS',

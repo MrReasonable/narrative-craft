@@ -1,20 +1,17 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { AppConfigModule } from './config/config.module'
-import { PrismaService } from './prisma/prisma.service'
+import { ConfigModule } from './config/config.module'
 import { UserModule } from './user/user.module'
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
-    AppConfigModule.forRoot({
+    ConfigModule.forRoot({
       envFilePath: process.env.ENV_FILE_PATH ?? '.env',
       useCache: true,
       isGlobal: true,
     }),
     UserModule,
+    PrismaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, PrismaService],
 })
 export class AppModule {}

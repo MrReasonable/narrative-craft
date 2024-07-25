@@ -1,7 +1,7 @@
 echo "Running pre-commit checks..."
 
 # Run lint-staged
-if ! pnpx lint-staged; then
+if ! pnpm lint-staged --verbose; then
     echo "❌ Pre-commit check failed: Code style issues found."
     echo "Please fix the above issues and try committing again."
     exit 1
